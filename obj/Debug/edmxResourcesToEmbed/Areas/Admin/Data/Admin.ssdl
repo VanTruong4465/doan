@@ -1,0 +1,580 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="BonsaiModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="AccCustomer">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="200" />
+    <Property Name="Phone" Type="varchar" MaxLength="12" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AccManager">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="200" />
+    <Property Name="Phone" Type="varchar" MaxLength="12" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Type" Type="int" />
+  </EntityType>
+  <EntityType Name="Cart">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Amount" Type="int" />
+    <Property Name="AccCustomerID" Type="int" Nullable="false" />
+    <Property Name="Pice" Type="float" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" />
+  </EntityType>
+  <EntityType Name="Categogy">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="CommentProduct">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="AccCustomerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CustomerOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AccCustomerID" Type="int" Nullable="false" />
+    <Property Name="CreateAtTime" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Content" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccManagerID" Type="int" />
+    <Property Name="Answer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="AccCustomerID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrderDetail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerOrderID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="float" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="Price" Type="float" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
+  <EntityType Name="Picture">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductID" Type="int" Nullable="false" />
+    <Property Name="Path" Type="varchar" MaxLength="2048" />
+    <Property Name="TypeID" Type="int" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="Info" Type="nvarchar(max)" />
+    <Property Name="Place" Type="nvarchar" MaxLength="12" />
+    <Property Name="Address" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="TypeID" Type="int" Nullable="false" />
+    <Property Name="CategoryID" Type="int" Nullable="false" />
+    <Property Name="Price" Type="float" />
+  </EntityType>
+  <EntityType Name="ReplyComment">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="CommentID" Type="int" />
+    <Property Name="Answer" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="StatusOrder">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+  </EntityType>
+  <EntityType Name="Type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar" MaxLength="250" />
+    <Property Name="Image" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <Association Name="FK__Cart__AccCustome__3E52440B">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__AccCustome__3F466844">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__ProductID__403A8C7D">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__ProductID__412EB0B6">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommentPr__AccCu__4222D4EF">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CommentProduct">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommentPr__AccCu__4316F928">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CommentProduct">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommentPr__Produ__440B1D61">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CommentProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CommentPr__Produ__44FF419A">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="CommentProduct" Type="Self.CommentProduct" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CommentProduct">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CustomerO__AccCu__45F365D3">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CustomerOrder">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CustomerO__AccCu__46E78A0C">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="CustomerOrder">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__AccCus__47DBAE45">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__AccCus__48CFD27E">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="AccCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__AccMan__49C3F6B7">
+    <End Role="AccManager" Type="Self.AccManager" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccManager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="AccManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Feedback__AccMan__4AB81AF0">
+    <End Role="AccManager" Type="Self.AccManager" Multiplicity="0..1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccManager">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="AccManagerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Custo__4BAC3F29">
+    <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerOrder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="CustomerOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Custo__4CA06362">
+    <End Role="CustomerOrder" Type="Self.CustomerOrder" Multiplicity="1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CustomerOrder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="CustomerOrderID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Produ__4D94879B">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Produ__4E88ABD4">
+    <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Statu__4F7CD00D">
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__OrderDeta__Statu__5070F446">
+    <End Role="StatusOrder" Type="Self.StatusOrder" Multiplicity="0..1" />
+    <End Role="OrderDetail" Type="Self.OrderDetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="StatusOrder">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="OrderDetail">
+        <PropertyRef Name="Status" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Picture__Product__5165187F">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Picture" Type="Self.Picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Picture">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Picture__Product__52593CB8">
+    <End Role="Product" Type="Self.Product" Multiplicity="1" />
+    <End Role="Picture" Type="Self.Picture" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Product">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Picture">
+        <PropertyRef Name="ProductID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Categor__534D60F1">
+    <End Role="Categogy" Type="Self.Categogy" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categogy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__Categor__5441852A">
+    <End Role="Categogy" Type="Self.Categogy" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categogy">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="CategoryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__TypeID__5535A963">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Product__TypeID__5629CD9C">
+    <End Role="Type" Type="Self.Type" Multiplicity="1" />
+    <End Role="Product" Type="Self.Product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="Product">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ReryCommet_AccCustomer">
+    <End Role="AccCustomer" Type="Self.AccCustomer" Multiplicity="0..1" />
+    <End Role="ReplyComment" Type="Self.ReplyComment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AccCustomer">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="ReplyComment">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="GetCate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="TypeId" Type="int" Mode="In" />
+  </Function>
+  <EntityContainer Name="BonsaiModelStoreContainer">
+    <EntitySet Name="AccCustomer" EntityType="Self.AccCustomer" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="AccManager" EntityType="Self.AccManager" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Categogy" EntityType="Self.Categogy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CommentProduct" EntityType="Self.CommentProduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="CustomerOrder" EntityType="Self.CustomerOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="OrderDetail" EntityType="Self.OrderDetail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Picture" EntityType="Self.Picture" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ReplyComment" EntityType="Self.ReplyComment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="StatusOrder" EntityType="Self.StatusOrder" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Cart__AccCustome__3E52440B" Association="Self.FK__Cart__AccCustome__3E52440B">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__AccCustome__3F466844" Association="Self.FK__Cart__AccCustome__3F466844">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__ProductID__403A8C7D" Association="Self.FK__Cart__ProductID__403A8C7D">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__ProductID__412EB0B6" Association="Self.FK__Cart__ProductID__412EB0B6">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentPr__AccCu__4222D4EF" Association="Self.FK__CommentPr__AccCu__4222D4EF">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="CommentProduct" EntitySet="CommentProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentPr__AccCu__4316F928" Association="Self.FK__CommentPr__AccCu__4316F928">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="CommentProduct" EntitySet="CommentProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentPr__Produ__440B1D61" Association="Self.FK__CommentPr__Produ__440B1D61">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="CommentProduct" EntitySet="CommentProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CommentPr__Produ__44FF419A" Association="Self.FK__CommentPr__Produ__44FF419A">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="CommentProduct" EntitySet="CommentProduct" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CustomerO__AccCu__45F365D3" Association="Self.FK__CustomerO__AccCu__45F365D3">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="CustomerOrder" EntitySet="CustomerOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CustomerO__AccCu__46E78A0C" Association="Self.FK__CustomerO__AccCu__46E78A0C">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="CustomerOrder" EntitySet="CustomerOrder" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__AccCus__47DBAE45" Association="Self.FK__Feedback__AccCus__47DBAE45">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__AccCus__48CFD27E" Association="Self.FK__Feedback__AccCus__48CFD27E">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__AccMan__49C3F6B7" Association="Self.FK__Feedback__AccMan__49C3F6B7">
+      <End Role="AccManager" EntitySet="AccManager" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Feedback__AccMan__4AB81AF0" Association="Self.FK__Feedback__AccMan__4AB81AF0">
+      <End Role="AccManager" EntitySet="AccManager" />
+      <End Role="Feedback" EntitySet="Feedback" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Custo__4BAC3F29" Association="Self.FK__OrderDeta__Custo__4BAC3F29">
+      <End Role="CustomerOrder" EntitySet="CustomerOrder" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Custo__4CA06362" Association="Self.FK__OrderDeta__Custo__4CA06362">
+      <End Role="CustomerOrder" EntitySet="CustomerOrder" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Produ__4D94879B" Association="Self.FK__OrderDeta__Produ__4D94879B">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Produ__4E88ABD4" Association="Self.FK__OrderDeta__Produ__4E88ABD4">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Statu__4F7CD00D" Association="Self.FK__OrderDeta__Statu__4F7CD00D">
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderDeta__Statu__5070F446" Association="Self.FK__OrderDeta__Statu__5070F446">
+      <End Role="StatusOrder" EntitySet="StatusOrder" />
+      <End Role="OrderDetail" EntitySet="OrderDetail" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Picture__Product__5165187F" Association="Self.FK__Picture__Product__5165187F">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Picture" EntitySet="Picture" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Picture__Product__52593CB8" Association="Self.FK__Picture__Product__52593CB8">
+      <End Role="Product" EntitySet="Product" />
+      <End Role="Picture" EntitySet="Picture" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Categor__534D60F1" Association="Self.FK__Product__Categor__534D60F1">
+      <End Role="Categogy" EntitySet="Categogy" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__Categor__5441852A" Association="Self.FK__Product__Categor__5441852A">
+      <End Role="Categogy" EntitySet="Categogy" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__TypeID__5535A963" Association="Self.FK__Product__TypeID__5535A963">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Product__TypeID__5629CD9C" Association="Self.FK__Product__TypeID__5629CD9C">
+      <End Role="Type" EntitySet="Type" />
+      <End Role="Product" EntitySet="Product" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ReryCommet_AccCustomer" Association="Self.FK_ReryCommet_AccCustomer">
+      <End Role="AccCustomer" EntitySet="AccCustomer" />
+      <End Role="ReplyComment" EntitySet="ReplyComment" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
