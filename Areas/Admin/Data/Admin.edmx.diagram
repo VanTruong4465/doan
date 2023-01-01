@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6173d2cc40d749169b722ec825fba170" Name="Diagram1">
+        <EntityTypeShape EntityType="BonsaiModel.AccCustomer" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="BonsaiModel.AccManager" Width="1.5" PointX="6" PointY="22.875" />
+        <EntityTypeShape EntityType="BonsaiModel.Cart" Width="1.5" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="BonsaiModel.Categogy" Width="1.5" PointX="0.75" PointY="5.375" />
+        <EntityTypeShape EntityType="BonsaiModel.CommentProduct" Width="1.5" PointX="5.25" PointY="8" />
+        <EntityTypeShape EntityType="BonsaiModel.CustomerOrder" Width="1.5" PointX="6" PointY="11.75" />
+        <EntityTypeShape EntityType="BonsaiModel.Feedback" Width="1.5" PointX="8.25" PointY="1.875" />
+        <EntityTypeShape EntityType="BonsaiModel.OrderDetail" Width="1.5" PointX="8.25" PointY="7.375" />
+        <EntityTypeShape EntityType="BonsaiModel.Picture" Width="1.5" PointX="5.25" PointY="19.625" />
+        <EntityTypeShape EntityType="BonsaiModel.Product" Width="1.5" PointX="3" PointY="6.75" />
+        <EntityTypeShape EntityType="BonsaiModel.ReplyComment" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="BonsaiModel.StatusOrder" Width="1.5" PointX="6" PointY="14.875" />
+        <EntityTypeShape EntityType="BonsaiModel.Type" Width="1.5" PointX="0.75" PointY="8.25" />
+        <AssociationConnector Association="BonsaiModel.FK__Cart__AccCustome__3E52440B" />
+        <AssociationConnector Association="BonsaiModel.FK__Cart__AccCustome__3F466844" />
+        <AssociationConnector Association="BonsaiModel.FK__CommentPr__AccCu__4222D4EF" />
+        <AssociationConnector Association="BonsaiModel.FK__CommentPr__AccCu__4316F928" />
+        <AssociationConnector Association="BonsaiModel.FK__CustomerO__AccCu__45F365D3" />
+        <AssociationConnector Association="BonsaiModel.FK__CustomerO__AccCu__46E78A0C" />
+        <AssociationConnector Association="BonsaiModel.FK__Feedback__AccCus__47DBAE45" />
+        <AssociationConnector Association="BonsaiModel.FK__Feedback__AccCus__48CFD27E" />
+        <AssociationConnector Association="BonsaiModel.FK_ReryCommet_AccCustomer" />
+        <AssociationConnector Association="BonsaiModel.FK__Feedback__AccMan__49C3F6B7" />
+        <AssociationConnector Association="BonsaiModel.FK__Feedback__AccMan__4AB81AF0" />
+        <AssociationConnector Association="BonsaiModel.FK__Cart__ProductID__403A8C7D" />
+        <AssociationConnector Association="BonsaiModel.FK__Cart__ProductID__412EB0B6" />
+        <AssociationConnector Association="BonsaiModel.FK__Product__Categor__534D60F1" />
+        <AssociationConnector Association="BonsaiModel.FK__Product__Categor__5441852A" />
+        <AssociationConnector Association="BonsaiModel.FK__CommentPr__Produ__440B1D61" />
+        <AssociationConnector Association="BonsaiModel.FK__CommentPr__Produ__44FF419A" />
+        <AssociationConnector Association="BonsaiModel.FK__OrderDeta__Custo__4BAC3F29" />
+        <AssociationConnector Association="BonsaiModel.FK__OrderDeta__Custo__4CA06362" />
+        <AssociationConnector Association="BonsaiModel.FK__OrderDeta__Produ__4D94879B" />
+        <AssociationConnector Association="BonsaiModel.FK__OrderDeta__Produ__4E88ABD4" />
+        <AssociationConnector Association="BonsaiModel.FK__OrderDeta__Statu__4F7CD00D" />
+        <AssociationConnector Association="BonsaiModel.FK__OrderDeta__Statu__5070F446" />
+        <AssociationConnector Association="BonsaiModel.FK__Picture__Product__5165187F" />
+        <AssociationConnector Association="BonsaiModel.FK__Picture__Product__52593CB8" />
+        <AssociationConnector Association="BonsaiModel.FK__Product__TypeID__5535A963" />
+        <AssociationConnector Association="BonsaiModel.FK__Product__TypeID__5629CD9C" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
