@@ -1,0 +1,65 @@
+﻿@using Bonsal_Gardent.Areas.Admin.Data
+@using System.Data.Entity;
+@{Bonsal_GardentEntities db = new Bonsal_GardentEntities(); }
+@{AccCustomer cust = (AccCustomer)Session["CInfo"]; }
+@{int ID = Convert.ToInt32(cust.ID.ToString()); }
+@{var Order = db.OrderDetails.Include(n => n.Product).Include(n => n.CustomerOrder).Where(n => n.Status == 2 && n.CustomerOrder.AccCustomerID == ID).ToList(); }
+@if (Order.Count == 0)
+{
+    <text>
+        <h2 class="text-black-50 font-weight-bold text-center p-3">Empty</h2>
+    </text>
+}
+else
+{
+    <text>
+        <div>
+            <table class="table table-striped">
+                <tr>
+                    <th>
+                        OrderID
+                    </th>
+                    <th>
+                        Product
+                    </th>
+                    <th>
+                        Quantiy
+                    </th>
+                    <th>
+                        Price
+                    </th>
+                    <th>
+                        Amount
+                    </th>
+                    <th>
+                        Note
+                    </th>
+                </tr>
+
+                @foreach (var item in Order)
+                {
+                    <tr>
+                        <td>
+                            @item.ID
+                        </td>
+                        <td>
+                            @item.Product.Name
+                        </td>
+                        <td>
+                            @item.Quantity
+                        </td>
+                        <td>
+                            @item.Price
+                        </td>
+                        <td>
+                            @item.Amount
+                        </td>
+                        <td>
+                            @item.Note
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </text>
+}

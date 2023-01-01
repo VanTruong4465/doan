@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    @{
+        Session["CEmail"] = null;
+        Session["CName"] = null;
+        Session["CInfo"] = null;
+    }
+
+    <div class="main-container" >
+        <div id="LoginForm" class="LoginForm" style="background-color: deepskyblue">
+
+            <h3 class="text-center font-weight-bold">Bonsal Login</h3>
+            @using (Html.BeginForm("LoginToSystem", "Security", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken() // this is for prevent CSRF attack
+                @Html.ValidationSummary(true)
+                <div class="form-group">
+                    <label for="" class="TitleAdmin">Email</label>
+                    <input type="text" class="form-control" name="CEmail" required />
+                </div>
+                <div class="form-group">
+                    <label for="" class="TitleAdmin">Password</label>
+                    <input type="password" class="form-control" name="CPassword" required />
+                </div>
+
+                <br />
+                <p class="error">@ViewBag.Error</p>
+                <div class="form-group">
+                    <input type="submit" value="LOGIN" class="btn btn-success w-100" />
+                </div>
+                <p class="TitleAdmin text-center">If you don't have account <a href="~/Security/Register" style="color: black">register</a> now.</p>
+            }
+        </div>
+    </div>
+<br />
+
+
+

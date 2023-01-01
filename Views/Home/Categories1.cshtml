@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Bonsal_Gardent.Areas.Admin.Data.GetCate_Result>
+
+
+@foreach (var item in Model)
+{
+    <li><a href="@Url.Action("ProductShope", "Home", new { id = item.ID, typeid=@ViewBag.TypeID})">@item.Name </a></li>
+}
+
+
+

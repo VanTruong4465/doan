@@ -1,0 +1,78 @@
+﻿@using Bonsal_Gardent.Areas.Admin.Data;
+@using PagedList.Mvc;
+@model PagedList.PagedList<Bonsal_Gardent.Areas.Admin.Data.Product>
+@{
+    ViewBag.Title = "ProductType";
+
+}
+
+<section class="">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-5">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__item">
+                        <h4>Categories</h4>
+                        <ul>
+                            @Html.Action("TypeShope", "Home")
+                        </ul>
+                    </div>
+                    <div class="blog__sidebar__item">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-7">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+
+                            <div class="blog__item">
+                                <div class="">
+                                    @{
+                                        Bonsal_GardentEntities db = new Bonsal_GardentEntities();
+
+                                        var PartList = db.Pictures.Where(n => n.ProductID == item.ID).ToList();
+                                        string Path = PartList[0].Path;
+                                        string[] paths = Path.Split(',');
+                                    }
+                                    <img  class="product__item__pic set-bg" src="~/Images/UploadedFiles/@paths[0]" width="400"/>
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="@Url.Action("ProductDetails", "Home", new {id=item.ID})">@item.Name</a></h5>
+                                    <p class="font-weight-bold">
+                                        @string.Format("{0:#,##0,0}", @item.Price) $
+                                    </p>
+                                    <a href="#" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    }
+
+                    <div class="col-lg-12">
+                        <div class="product__pagination blog__pagination">
+                            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                            <div class="MenuTrang">
+                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page = page }))
+                            </div>
+                            <style>
+                                .MenuTrang {
+                                    display: inline;
+                                    text-align: center;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Bonsal_Gardent.Areas.Admin.Data.Type>
+
+
+<div class="categories__slider owl-carousel">
+    @foreach (var item in Model)
+    {
+<div class="col-lg-3">
+
+    <div class="categories__item set-bg">
+
+        <img src="~/Images/UploadedFiles/Type/@item.Image" height="250"/>
+        <h5><a href="@Url.Action("ProductShope", "Home", new { typeid = item.ID })" style="margin-top: -150px">@item.Name</a></h5>
+
+    </div>
+</div>}
+</div>

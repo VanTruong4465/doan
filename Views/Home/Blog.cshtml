@@ -1,0 +1,75 @@
+﻿
+@using PagedList.Mvc;
+@model PagedList.PagedList<Bonsal_Gardent.Areas.Admin.Data.Picture>
+@{
+    ViewBag.Title = "ProductType";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<section class="blog spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-3">
+                <div class="blog__sidebar">
+                    <div class="blog__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="blog__sidebar__item">
+                        <h4>Categories</h4>
+                        <ul>
+                            @Html.Action("TypeShope", "Home")
+                        </ul>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <div class="row">
+                    @foreach (var item in Model)
+                    {
+                        string[] paths = @item.Path.Split(',');
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+
+                            <div class="blog__item">
+                                <div class="">
+                                    <img src="~/Images/UploadedFiles/@paths[0]"  width="400">
+                                </div>
+                                <div class="blog__item__text">
+                                    <ul>
+                                        <li><i class="fa fa-calendar-o"></i> May 4,2019</li>
+                                        <li><i class="fa fa-comment-o"></i> 5</li>
+                                    </ul>
+                                    <h5><a href="@Url.Action("ProductDetails", "Home",new { idpath = item.ID, id = item.TypeID })" class="NameProduct">@item.Product.Name</a></h5>
+
+                                    <a href="@Url.Action("ProductDetails", "Home",new { idpath = item.ID, id = item.TypeID })" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    }
+
+                    <div class="col-lg-12">
+                        <div class="product__pagination blog__pagination">
+                            Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount
+                            <div class="MenuTrang">
+                                @Html.PagedListPager(Model, page => Url.Action("Blog", new { page = page }))
+                            </div>
+                            <style>
+                                .MenuTrang {
+                                    display: inline;
+                                    text-align: center;
+                                }
+                            </style>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

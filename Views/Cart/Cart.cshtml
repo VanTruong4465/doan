@@ -1,0 +1,104 @@
+﻿
+@using Bonsal_Gardent.Areas.Admin.Data;
+@model List<Bonsal_Gardent.Areas.Admin.Data.Cart>
+@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{ List<Cart> lis = (List<Cart>)Session["Cart"];
+    int cnt = lis.Count();
+    }
+@if (cnt != 0)
+{
+    <text>
+        <section class="shoping-cart spad">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="shoping__product"> Products</th>
+                                        <th>Price</th>
+                                        <th>Quantity</th>
+                                        <th>Amount</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tbody>
+
+                                        <tr>
+                                            <td class="shoping__cart__item">
+                                                @item.Name
+                                            </td>
+                                            @using (Html.BeginForm("UpdateCart", "Cart", new { iProductID = item.ProductID }))
+                                            {
+                                                <td class="shoping__cart__price">
+                                                    @string.Format("{0:#,##0,0}", @item.Pice)
+                                                </td>
+                                                <td class="shoping__cart__quantity">
+                                                    <div class="quantity">
+                                                        <div class="pro-qty">
+                                                            <input min="1" name="Amount" value="@item.Amount" style="background-color:#f4ff94" />
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="shoping__cart__total">
+                                                    @string.Format("{0:#,##0,0}", item.Pice * item.Amount)
+                                                </td>
+                                                <td class="shoping__cart__item__close">
+                                                    @Html.ActionLink("Remove", "DeleteCart", new { iProductID = item.ProductID }, new { @class = "btn btn-danger" })
+                                                </td>
+                                                <td>
+                                                    <input type="submit" value="Update" class="btn btn-success" />
+                                                </td>
+                                            }
+                                        </tr>
+
+
+                                    </tbody>
+                                }
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <h4 style="font-size: 20px; font-weight: 700; color: #1c1c1c; padding-bottom: 20px;display:contents">Total</h4>
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        @string.Format("{0:#,##0,0}", @ViewBag.Total)
+                                    </td>
+                                    <td class="shoping__cart__item__close">
+                                    </td>
+                                    <td>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shoping__cart__btns">
+                            <a href="@Url.Action("Index","Home")" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                            <a href="@Url.Action("Order","Cart")" class="primary-btn cart-btn cart-btn-right CheckOutBtn ">
+                                CHECKOUT
+                            </a>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </text>
+
+}
+else
+{
+    <p style="color: red">There are no products in the cart</p>
+}
+

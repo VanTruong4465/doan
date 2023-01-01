@@ -1,0 +1,121 @@
+﻿
+@using Bonsal_Gardent.Areas.Admin.Data;
+
+@model IEnumerable<Bonsal_Gardent.Areas.Admin.Data.Cart>
+@{
+    ViewBag.Title = "Order";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="checkout spad">
+    <div class="container">
+
+        <div class="checkout__form">
+            <h4 class="text-center">Billing Details</h4>
+            <div>
+                <div>
+                    @{
+                        AccCustomer kh = (AccCustomer)Session["CInfo"];
+                    }
+                    <div class="row">
+                        <div class="col-lg-8 col-md-6">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Name<span>*</span></p>
+                                        <input type="text" value="@kh.Name">
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="checkout__input">
+                                <p>Address<span>*</span></p>
+                                <input type="text" value="@kh.Address">
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Phone<span>*</span></p>
+                                        <input type="text" value="@kh.Phone">
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="checkout__input">
+                                        <p>Email<span>*</span></p>
+                                        <input type="text" value="@kh.Email">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="checkout__input">
+                                <p>Order notes<span>*</span></p>
+                                <input type="text"
+                                       placeholder="Notes about your order, e.g. special notes for delivery." name="Note">
+                            </div>
+                        </div>
+
+                        <div>
+
+                            <div class="checkout__order">
+                                <h4>Your Order</h4>
+                                <div class="checkout__order__products">Products <span>Total</span></div>
+                                <ul>
+                                    @foreach (var item in Model)
+                                    {
+                                        <li>@item.Name <span> @string.Format("{0:#,##0,0}", item.Pice * item.Amount)</span></li>
+                                    }
+                                </ul>
+
+                                <div class="checkout__order__total">Total <span>  @string.Format("{0:#,##0,0}", @ViewBag.Total)</span></div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="acc-or">
+                                        Order Pay
+                                        <input name="bnt" value="1" type="radio" id="acc-or">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment">
+                                        Check VNPAY
+                                        <input name="bnt" value="2" type="radio" id="payment">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        Check Paypal
+                                        <input name="bnt" value="3" type="radio" id="paypal">
+                                        <span class="checkmark"></span>
+                                    </label>
+                                </div>
+                                <button id="btn1" class="site-btn">PLACE ORDER</button>
+                                <script language="javascript">
+                                var ID = "";
+                                document.getElementById("btn1").onclick = function () {
+                                    var checkbox = document.getElementsByName("bnt");
+                                    for (var i = 0; i < checkbox.length; i++) {
+                                        if (checkbox[i].checked === true) {
+                                            ID = checkbox[i].value;
+
+                                        }
+                                    }
+                                    if (ID == "1")
+                                        location.href = "@Url.Action("OrderPay", "Cart")";
+                                    else if (ID == "2")
+                                        location.href = "@Url.Action("Payment","Cart")";
+                                    else if (ID == "3")
+                                        location.href = "@Url.Action("PaymentWithPaypal","Cart")";
+                                    else alert("Chưa chọn phương thức thanh toán");
+                                }
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+

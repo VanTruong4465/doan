@@ -1,0 +1,7 @@
+﻿@model IEnumerable<Bonsal_Gardent.Areas.Admin.Data.Type>
+
+
+@foreach (var item in Model)
+{
+    <li style="font-weight: 700;"><a href="@Url.Action("ProductType", "Home", new { id = item.ID })">@item.Name</a></li>
+}
